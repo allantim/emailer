@@ -1,0 +1,28 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /emailer
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
+    include-exception: false
+
+logging:
+  level:
+    root: INFO
+    org.apache.http: WARN
+
+app:
+  email-client-mail-gun:
+    url: https://api.mailgun.net/v3/sandbox8a16e779365f41e9b0c38839c4cc873c.mailgun.org/messages
+    auth-user: api
+    auth-password: c8c4b545fa6b027e523699ee4a4d350a-45f7aa85-819ca8a3
+  email-sender-retry:
+    maxRetryAttempts: 3
+    waitDurationMillis: 100
+  email-sender-circuit-breaker:
+    failureRateThreshold: 50
+    waitDurationInOpenStateMillis: 1000
+    minimumNumberOfCalls: 10
+    slidingWindowSizeCount: 50

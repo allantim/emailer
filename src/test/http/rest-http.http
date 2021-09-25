@@ -1,0 +1,57 @@
+### SEND MAIL
+
+POST {{baseUrl}}/api/v1/email
+Content-Type: application/json
+
+{
+    "to" : ["allantim@hotmail.com"],
+    "cc" : ["allantim1234@googlemail.com"],
+    "title": "whatevs",
+    "body" : "Email test body"
+}
+
+### Bad emails
+
+POST {{baseUrl}}/api/v1/email
+Content-Type: application/json
+
+{
+    "to" : ["allantim@hotmail.c"],
+    "cc" : ["allantim*1234@googlemail.com"],
+    "bcc" : ["qqa*1234@googlemail.com", "wwa*1234@googlemail.com"],
+    "title": "whatevs",
+    "body" : "Email test body"
+}
+
+> {%
+ client.test("Not found", function(){
+   client.assert(response.status === 400, "Response status is not 400.")
+ });
+ %}
+
+### Bad title
+
+POST {{baseUrl}}/api/v1/email
+Content-Type: application/json
+
+{
+  "to" : ["allantim@hotmail.com"],
+  "cc" : ["allantim1234@googlemail.com"],
+  "body" : "Email test body"
+}
+
+> {%
+ client.test("Not found", function(){
+   client.assert(response.status === 400, "Response status is not 400.")
+ });
+ %}
+
+### Bad Body
+POST {{baseUrl}}/api/v1/email
+Content-Type: application/json
+
+{
+    "to" : ["allantim@hotmail.com"],
+    "cc" : ["allantim1234@googlemail.com"],
+    "title": "whatevs"
+}

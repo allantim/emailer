@@ -1,0 +1,7 @@
+version: '3.9'
+services:
+  weathertracker:
+    image: tim/emailer:latest
+    build:
+      context: ./
+      dockerfile: ./Dockerfile

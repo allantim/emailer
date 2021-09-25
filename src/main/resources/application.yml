@@ -1,0 +1,29 @@
+server:
+  port: 8080
+  servlet:
+    context-path: /emailer
+  error:
+    include-message: always
+    include-binding-errors: always
+    include-stacktrace: always
+    include-exception: false
+
+logging:
+  level:
+    root: INFO
+    org.apache.http: WARN
+
+app:
+  email-from: tim
+  email-client-mail-gun:
+    url: ${MAIL_GUN_URL}
+    auth-user: ${MAIL_GUN_USER}
+    auth-password: ${MAIL_GUN_PASSWORD}
+  email-sender-retry:
+    maxRetryAttempts: ${EMAIL_RETRY_MAX_ATTEMPTS:3}
+    waitDurationMillis: ${EMAIL_RETRY_WAIT_DURATION:150}
+  email-sender-circuit-breaker:
+    failureRateThreshold: ${CIRCUIT_BREAKER_FAILURE_RATE_THRESHOLD:50}
+    waitDurationInOpenStateMillis: ${CIRCUIT_BREAKER_WAIT_DURATION_OPEN_STATE:1000}
+    minimumNumberOfCalls: ${CIRCUIT_BREAKER_MIN_NUMBER_OF_CALLS:10}
+    slidingWindowSize: ${CIRCUIT_BREAKER_MIN_NUMBER_OF_CALLS:50}

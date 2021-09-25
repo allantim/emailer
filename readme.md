@@ -127,4 +127,4 @@ put the requests into a queue, and return a notification to the user. Some other
 can then pull the messages from the queue and do the sending. 
 
 This kind of design would speed up the response to the user and allow each instance to deal with a higher 
-number of requests by passing it off quickly.
+number of requests.

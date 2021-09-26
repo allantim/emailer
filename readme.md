@@ -97,7 +97,12 @@ So I just added a placeholder for the 2nd email client and included it in _Retry
 As long as we code to conform with the interface it will work.
 
 ### Complete Error handling
-I didn't completely test the error scenarios. I guess I need to check the 
+I didn't completely test the error scenarios. I know that RestTemplate will throw an exception when non-2XX is
+returned. I need to work out which ones are eligible for retry.
+
+I think I currently return a 200 when both suppliers fail, with a message. Given this acts like a proxy, 
+this could be changed to a 502 Bad Gateway, or if there is a timeout a 504 Gateway Timeout. Doing this requires
+capturing exceptions from each sender, and throwing an exception.
 
 ### More Automated tests
 Add Failsafe plugin to Maven, and separate Integration from Unit tests.
